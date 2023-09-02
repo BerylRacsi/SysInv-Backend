@@ -8,7 +8,7 @@ import UserPermission from '../models/userPermissionModel.js';
 const protect = asyncHandler(async (req, res, next) => {
 	let token;
 	token = req.cookies.jwt;
-
+	console.log('oiioio')
 	if (token) {
 		try {
 			const decoded = jwt.verify(token, process.env.JWT_SECRET);
@@ -19,12 +19,12 @@ const protect = asyncHandler(async (req, res, next) => {
 				address: req.originalUrl,
 				method: req.method,
 			})
-
+			console.log(permission)
 			const userPermission = await UserPermission.findOne({
 				user: req.user.id,
 				permission: permission.id,
 			})
-
+			console.log(userPermission)
 			if (userPermission === null) {
 				res.status(401)
 				throw new Error('No Permission')

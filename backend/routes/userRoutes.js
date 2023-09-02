@@ -5,6 +5,7 @@ import {
   logoutUser,
   getUserProfile,
   updateUserProfile,
+  getUsers,
 } from '../controllers/userController.js';
 import { protect } from '../middleware/authMiddleware.js';
 
@@ -15,7 +16,10 @@ router.post('/auth', authUser);
 router.post('/logout', logoutUser);
 router
   .route('/profile')
-  .get(protect, getUserProfile)
-  .put(protect, updateUserProfile);
+    .get(protect, getUserProfile)
+    .put(protect, updateUserProfile);
+router
+  .route('/list')
+    .get(protect, getUsers);
 
 export default router;
